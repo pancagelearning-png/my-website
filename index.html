@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pankaj Sharma — Portfolio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f11;
+      --surface: #1a1a1f;
+      --border: #2a2a32;
+      --accent: #7c6af7;
+      --accent-light: #a89af9;
+      --text: #e8e8f0;
+      --muted: #888896;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(15,15,17,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-weight: 700; font-size: 1.1rem;
+      color: var(--accent-light); text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: .95rem; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 2rem; max-width: 860px; margin: 0 auto; }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding-top: 5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(124,106,247,.15);
+      color: var(--accent-light);
+      border: 1px solid rgba(124,106,247,.3);
+      padding: .25rem .75rem; border-radius: 99px;
+      font-size: .8rem; letter-spacing: .05em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800; line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-title span { color: var(--accent-light); }
+
+    .hero-sub {
+      font-size: 1.1rem; color: var(--muted);
+      max-width: 540px; margin-bottom: 2.5rem;
+    }
+
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      padding: .7rem 1.6rem; border-radius: var(--radius);
+      font-size: .95rem; font-weight: 600;
+      text-decoration: none; cursor: pointer;
+      border: none; transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 4px 24px rgba(124,106,247,.35);
+    }
+    .btn-primary:hover { box-shadow: 0 6px 30px rgba(124,106,247,.5); }
+
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent-light); }
+
+    /* ── ABOUT ── */
+    #about { border-top: 1px solid var(--border); }
+
+    .section-label {
+      font-size: .78rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: .75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800; margin-bottom: 1.25rem;
+    }
+
+    .about-body {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text { color: var(--muted); font-size: 1rem; }
+    .about-text p + p { margin-top: 1rem; }
+
+    .skills { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+    .skill-tag {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); padding: .3rem .8rem; border-radius: 6px;
+      font-size: .85rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact { border-top: 1px solid var(--border); }
+
+    .contact-wrap {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem;
+    }
+
+    .contact-info h3 { font-size: 1.1rem; margin-bottom: .5rem; }
+    .contact-info p  { color: var(--muted); font-size: .95rem; margin-bottom: 1.5rem; }
+
+    .contact-link {
+      display: flex; align-items: center; gap: .6rem;
+      color: var(--muted); text-decoration: none;
+      font-size: .9rem; margin-bottom: .75rem;
+      transition: color .2s;
+    }
+    .contact-link:hover { color: var(--accent-light); }
+
+    /* ── FORM ── */
+    form { display: flex; flex-direction: column; gap: 1rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    label { display: flex; flex-direction: column; gap: .4rem; font-size: .85rem; color: var(--muted); }
+
+    input, textarea {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); border-radius: var(--radius);
+      padding: .7rem 1rem; font-size: .95rem; font-family: inherit;
+      transition: border-color .2s, box-shadow .2s;
+      outline: none; resize: vertical;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(124,106,247,.15);
+    }
+
+    textarea { min-height: 120px; }
+
+    .form-status {
+      font-size: .88rem; padding: .7rem 1rem; border-radius: var(--radius);
+      display: none;
+    }
+    .form-status.success { background: rgba(52,211,153,.12); color: #34d399; border: 1px solid rgba(52,211,153,.25); display: block; }
+    .form-status.error   { background: rgba(248,113,113,.12); color: #f87171; border: 1px solid rgba(248,113,113,.25); display: block; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center; padding: 2rem;
+      color: var(--muted); font-size: .85rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .about-body, .contact-wrap, .form-row { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#home">PS</a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="badge">Available for work</div>
+    <h1 class="hero-title">Hi, I'm <span>Pankaj Sharma</span><br>Full-Stack Developer</h1>
+    <p class="hero-sub">I build fast, accessible web applications with a focus on clean code and great user experiences.</p>
+    <div class="btn-group">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#about" class="btn btn-outline">Learn more</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">About me</div>
+    <h2 class="section-title">Turning ideas into products</h2>
+    <div class="about-body">
+      <div class="about-text">
+        <p>I'm a full-stack developer with a passion for building things that live on the internet. I care deeply about performance, accessibility, and thoughtful design.</p>
+        <p>When I'm not coding I enjoy hiking, photography, and contributing to open-source projects.</p>
+      </div>
+      <div>
+        <p style="font-size:.85rem;color:var(--muted);margin-bottom:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;">Tech stack</p>
+        <div class="skills">
+          <span class="skill-tag">HTML / CSS</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Git</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Let's work together</h2>
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <h3>Get in touch</h3>
+        <p>Have a project in mind or just want to say hello? Fill out the form and I'll get back to you within 24 hours.</p>
+        <a class="contact-link" href="mailto:pankaj@example.com">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          pankaj@example.com
+        </a>
+        <a class="contact-link" href="https://github.com" target="_blank" rel="noopener">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          github.com/pankaj
+        </a>
+      </div>
+
+      <form id="contact-form" novalidate>
+        <div class="form-row">
+          <label>
+            Name
+            <input type="text" name="name" placeholder="Your name" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" placeholder="you@example.com" required />
+          </label>
+        </div>
+        <label>
+          Subject
+          <input type="text" name="subject" placeholder="What's this about?" />
+        </label>
+        <label>
+          Message
+          <textarea name="message" placeholder="Tell me about your project…" required></textarea>
+        </label>
+        <div class="form-status" id="form-status"></div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start" id="submit-btn">
+          Send message
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Pankaj Sharma · Built with HTML, CSS & JavaScript</p>
+  </footer>
+
+  <script>
+    // Smooth active nav highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => {
+            a.style.color = a.getAttribute('href') === '#' + entry.target.id
+              ? 'var(--text)'
+              : '';
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+
+    // Contact form
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const name    = form.name.value.trim();
+      const email   = form.email.value.trim();
+      const message = form.message.value.trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      status.className = 'form-status';
+      status.textContent = '';
+
+      if (!name || !email || !message) {
+        status.textContent = 'Please fill in your name, email, and message.';
+        status.className = 'form-status error';
+        return;
+      }
+
+      if (!emailOk) {
+        status.textContent = 'Please enter a valid email address.';
+        status.className = 'form-status error';
+        return;
+      }
+
+      // Simulate sending
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      setTimeout(() => {
+        status.textContent = "Thanks, " + name + "! Your message has been sent. I'll be in touch soon.";
+        status.className = 'form-status success';
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send message';
+      }, 1200);
+    });
+  </script>
+
+</body>
+</html>
